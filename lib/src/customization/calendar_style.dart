@@ -164,6 +164,9 @@ class CalendarStyle {
   /// dayTextFormatter: (date, locale) => DateFormat.d(locale).format(date),
   /// ```
   final TextFormatter? dayTextFormatter;
+  final Decoration pointMissDecoration;
+  final TextStyle pointMissTextStyle;
+  final TextStyle pointMissSubTextStyle;
 
   /// Creates a `CalendarStyle` used by `TableCalendar` widget.
   const CalendarStyle({
@@ -231,6 +234,7 @@ class CalendarStyle {
     this.withinRangeDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.outsideTextStyle = const TextStyle(color: Color(0xFFAEAEAE)),
     this.outsideDecoration = const BoxDecoration(shape: BoxShape.circle),
+    this.pointMissDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.disabledTextStyle = const TextStyle(color: Color(0xFFBFBFBF)),
     this.disabledDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.holidayTextStyle = const TextStyle(color: Color(0xFF5C6BC0)),
@@ -247,6 +251,8 @@ class CalendarStyle {
         const TextStyle(fontSize: 12, color: Color(0xFFBFBFBF)),
     this.defaultTextStyle = const TextStyle(),
     this.defaultSubTextStyle = const TextStyle(),
+    this.pointMissTextStyle = const TextStyle(),
+    this.pointMissSubTextStyle = const TextStyle(),
     this.defaultDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.rowDecoration = const BoxDecoration(),
     this.tableBorder = const TableBorder(),

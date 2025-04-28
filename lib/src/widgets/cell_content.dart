@@ -24,6 +24,10 @@ class CellContent extends StatelessWidget {
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
   final String pointCount;
+  //已签到
+  final bool pointIsCheck;
+  //遗漏签到
+  final bool pointMissCheck;
 
   const CellContent({
     super.key,
@@ -43,6 +47,8 @@ class CellContent extends StatelessWidget {
     required this.isWeekend,
     required this.currentMonth,
     required this.pointCount,
+    required this.pointIsCheck,
+    required this.pointMissCheck,
     this.locale,
   });
 
@@ -80,16 +86,6 @@ class CellContent extends StatelessWidget {
             alignment: alignment,
             child: Text(text, style: calendarStyle.disabledTextStyle),
           );
-    } else if (isSelected) {
-      cell = calendarBuilders.selectedBuilder?.call(context, day, focusedDay) ??
-          AnimatedContainer(
-            duration: duration,
-            margin: margin,
-            padding: padding,
-            decoration: calendarStyle.selectedDecoration,
-            alignment: alignment,
-            child: Text(text, style: calendarStyle.selectedTextStyle),
-          );
     } else if (isRangeStart) {
       cell =
           calendarBuilders.rangeStartBuilder?.call(context, day, focusedDay) ??
@@ -119,7 +115,13 @@ class CellContent extends StatelessWidget {
             padding: padding,
             decoration: calendarStyle.todayDecoration,
             alignment: alignment,
-            child: Text(text, style: calendarStyle.todayTextStyle),
+            child: Column(
+              children: [
+                Text('+ ${pointCount}', style: calendarStyle.todayTextStyle),
+                Text('${text} ${currentMonth}',
+                    style: calendarStyle.todaySubTextStyle),
+              ],
+            ),
           );
     } else if (isHoliday) {
       cell = calendarBuilders.holidayBuilder?.call(context, day, focusedDay) ??
@@ -151,6 +153,39 @@ class CellContent extends StatelessWidget {
             decoration: calendarStyle.outsideDecoration,
             alignment: alignment,
             child: Text(text, style: calendarStyle.outsideTextStyle),
+          );
+    } else if (pointMissCheck) {
+      cell = calendarBuilders.selectedBuilder?.call(context, day, focusedDay) ??
+          AnimatedContainer(
+            duration: duration,
+            margin: margin,
+            padding: padding,
+            decoration: calendarStyle.pointMissDecoration,
+            alignment: alignment,
+            child: Column(
+              children: [
+                Text('+ ${pointCount}',
+                    style: calendarStyle.pointMissTextStyle),
+                Text('${text} ${currentMonth}',
+                    style: calendarStyle.pointMissSubTextStyle),
+              ],
+            ),
+          );
+    } else if (pointIsCheck) {
+      cell = calendarBuilders.selectedBuilder?.call(context, day, focusedDay) ??
+          AnimatedContainer(
+            duration: duration,
+            margin: margin,
+            padding: padding,
+            decoration: calendarStyle.selectedDecoration,
+            alignment: alignment,
+            child: Column(
+              children: [
+                Text('+ ${pointCount}', style: calendarStyle.selectedTextStyle),
+                Text('${text} ${currentMonth}',
+                    style: calendarStyle.selectedSubTextStyle),
+              ],
+            ),
           );
     } else {
       cell = calendarBuilders.defaultBuilder?.call(context, day, focusedDay) ??
