@@ -213,6 +213,8 @@ class TableCalendar<T> extends StatefulWidget {
   /// Called when the calendar is created. Exposes its PageController.
   final void Function(PageController pageController)? onCalendarCreated;
 
+  final String pointCount;
+
   /// Creates a `TableCalendar` widget.
   TableCalendar({
     super.key,
@@ -237,6 +239,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.sixWeekMonthsEnforced = false,
     this.shouldFillViewport = false,
     this.weekNumbersVisible = false,
+    this.pointCount = '',
     this.rowHeight = 52.0,
     this.daysOfWeekHeight = 16.0,
     this.formatAnimationDuration = const Duration(milliseconds: 200),
@@ -580,6 +583,8 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   Widget _buildCell(DateTime day, DateTime focusedDay) {
     final isOutside = day.month != focusedDay.month;
 
+    String currentMonth = DateFormat.MMM(widget.locale).format(focusedDay);
+
     if (isOutside && _shouldBlockOutsideDays) {
       return Container();
     }
@@ -642,6 +647,8 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isOutside: isOutside,
           isDisabled: isDisabled,
           isWeekend: isWeekend,
+          currentMonth: currentMonth,
+          pointCount: widget.pointCount,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           locale: widget.locale,
         );

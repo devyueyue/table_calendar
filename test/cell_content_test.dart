@@ -40,6 +40,8 @@ Widget setupTestWidget(
       isRangeEnd: isRangeEnd,
       isWithinRange: isWithinRange,
       isHoliday: isHoliday,
+      currentMonth: '',
+      pointCount: '',
       isTodayHighlighted: isTodayHighlighted,
       locale: locale,
     ),

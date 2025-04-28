@@ -74,12 +74,14 @@ class CalendarStyle {
 
   /// TextStyle for a day cell that matches the current day.
   final TextStyle todayTextStyle;
+  final TextStyle todaySubTextStyle;
 
   /// Decoration for a day cell that matches the current day.
   final Decoration todayDecoration;
 
   /// TextStyle for day cells that are currently marked as selected by `selectedDayPredicate`.
   final TextStyle selectedTextStyle;
+  final TextStyle selectedSubTextStyle;
 
   /// Decoration for day cells that are currently marked as selected by `selectedDayPredicate`.
   final Decoration selectedDecoration;
@@ -130,6 +132,7 @@ class CalendarStyle {
 
   /// TextStyle for day cells that match `weekendDay` list.
   final TextStyle weekendTextStyle;
+  final TextStyle weekendSubTextStyle;
 
   /// Decoration for day cells that match `weekendDay` list.
   final Decoration weekendDecoration;
@@ -139,6 +142,7 @@ class CalendarStyle {
 
   /// TextStyle for day cells that do not match any other styles.
   final TextStyle defaultTextStyle;
+  final TextStyle defaultSubTextStyle;
 
   /// Decoration for day cells that do not match any other styles.
   final Decoration defaultDecoration;
@@ -186,6 +190,10 @@ class CalendarStyle {
     this.todayTextStyle = const TextStyle(
       color: Color(0xFFFAFAFA),
       fontSize: 16.0,
+    ),
+    this.todaySubTextStyle = const TextStyle(
+      color: Color(0xFFFAFAFA),
+      fontSize: 8.0,
     ), //
     this.todayDecoration = const BoxDecoration(
       color: Color(0xFF9FA8DA),
@@ -194,6 +202,10 @@ class CalendarStyle {
     this.selectedTextStyle = const TextStyle(
       color: Color(0xFFFAFAFA),
       fontSize: 16.0,
+    ),
+    this.selectedSubTextStyle = const TextStyle(
+      color: Color(0xFFFAFAFA),
+      fontSize: 8.0,
     ),
     this.selectedDecoration = const BoxDecoration(
       color: Color(0xFF5C6BC0),
@@ -229,10 +241,12 @@ class CalendarStyle {
       shape: BoxShape.circle,
     ),
     this.weekendTextStyle = const TextStyle(color: Color(0xFF5A5A5A)),
+    this.weekendSubTextStyle = const TextStyle(color: Color(0xFF5A5A5A)),
     this.weekendDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.weekNumberTextStyle =
         const TextStyle(fontSize: 12, color: Color(0xFFBFBFBF)),
     this.defaultTextStyle = const TextStyle(),
+    this.defaultSubTextStyle = const TextStyle(),
     this.defaultDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.rowDecoration = const BoxDecoration(),
     this.tableBorder = const TableBorder(),

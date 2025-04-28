@@ -20,8 +20,10 @@ class CellContent extends StatelessWidget {
   final bool isDisabled;
   final bool isHoliday;
   final bool isWeekend;
+  final String currentMonth;
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
+  final String pointCount;
 
   const CellContent({
     super.key,
@@ -39,6 +41,8 @@ class CellContent extends StatelessWidget {
     required this.isDisabled,
     required this.isHoliday,
     required this.isWeekend,
+    required this.currentMonth,
+    required this.pointCount,
     this.locale,
   });
 
@@ -158,11 +162,19 @@ class CellContent extends StatelessWidget {
                 ? calendarStyle.weekendDecoration
                 : calendarStyle.defaultDecoration,
             alignment: alignment,
-            child: Text(
-              text,
-              style: isWeekend
-                  ? calendarStyle.weekendTextStyle
-                  : calendarStyle.defaultTextStyle,
+            child: Column(
+              children: [
+                Text('+ ${pointCount}',
+                    style: isWeekend
+                        ? calendarStyle.weekendTextStyle
+                        : calendarStyle.defaultTextStyle),
+                Text(
+                  '${text} ${currentMonth}',
+                  style: isWeekend
+                      ? calendarStyle.weekendSubTextStyle
+                      : calendarStyle.defaultSubTextStyle,
+                ),
+              ],
             ),
           );
     }
