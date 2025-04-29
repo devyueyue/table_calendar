@@ -156,14 +156,7 @@ class CellContent extends StatelessWidget {
               );
     } else if (isOutside) {
       cell = calendarBuilders.outsideBuilder?.call(context, day, focusedDay) ??
-          AnimatedContainer(
-            duration: duration,
-            margin: margin,
-            padding: padding,
-            decoration: calendarStyle.outsideDecoration,
-            alignment: alignment,
-            child: Text(text, style: calendarStyle.outsideTextStyle),
-          );
+          SizedBox.shrink();
     } else if (pointMissCheck) {
       cell = calendarBuilders.selectedBuilder?.call(context, day, focusedDay) ??
           AnimatedContainer(

@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:table_calendar_example/utils.dart';
 
 class TableBasicsExample extends StatefulWidget {
   const TableBasicsExample({super.key});
@@ -26,8 +25,8 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14),
         child: TableCalendar(
-          firstDay: kFirstDay,
-          lastDay: kLastDay,
+          firstDay: _focusedDay.subtract(Duration(days: 31)),
+          lastDay: _focusedDay.add(Duration(days: 31)),
           focusedDay: _focusedDay,
           calendarFormat: _calendarFormat,
           rowHeight: 76,
@@ -80,6 +79,8 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           pointTodayIc: 'assets/images/point_today_ic.png',
           pointNotStartIc: 'assets/images/point_not_start_ic.png',
           pointMissIc: 'assets/images/point_miss_ic.png',
+          daysOfWeekHeight: 30,
+          locale: 'id_ID',
           selectedDayPredicate: (day) {
             // Use `selectedDayPredicate` to determine which day is currently selected.
             // If this returns true, then `day` will be marked as selected.
