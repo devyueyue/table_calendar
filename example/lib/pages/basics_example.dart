@@ -76,6 +76,10 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
             pointMissSubTextStyle: TextStyle(
                 fontSize: 8, color: Color(0xFF333333).withOpacity(0.6)),
           ),
+          pointCheckIc: 'assets/images/point_check_ic.png',
+          pointTodayIc: 'assets/images/point_today_ic.png',
+          pointNotStartIc: 'assets/images/point_not_start_ic.png',
+          pointMissIc: 'assets/images/point_miss_ic.png',
           selectedDayPredicate: (day) {
             // Use `selectedDayPredicate` to determine which day is currently selected.
             // If this returns true, then `day` will be marked as selected.

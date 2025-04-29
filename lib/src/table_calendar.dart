@@ -217,6 +217,10 @@ class TableCalendar<T> extends StatefulWidget {
 
   ///积分签到集合
   final List<int>? pointCheckList;
+  final String pointCheckIc;
+  final String pointMissIc;
+  final String pointNotStartIc;
+  final String pointTodayIc;
 
   /// Creates a `TableCalendar` widget.
   TableCalendar({
@@ -244,6 +248,10 @@ class TableCalendar<T> extends StatefulWidget {
     this.weekNumbersVisible = false,
     this.pointCheckList,
     this.pointCount = '',
+    this.pointCheckIc = '',
+    this.pointMissIc = '',
+    this.pointNotStartIc = '',
+    this.pointTodayIc = '',
     this.rowHeight = 52.0,
     this.daysOfWeekHeight = 16.0,
     this.formatAnimationDuration = const Duration(milliseconds: 200),
@@ -658,6 +666,10 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
               !(widget.pointCheckList ?? []).contains(day.day),
           pointIsCheck:
               !isOutside && (widget.pointCheckList ?? []).contains(day.day),
+          pointCheckIc: widget.pointCheckIc,
+          pointNotStartIc: widget.pointNotStartIc,
+          pointMissIc: widget.pointMissIc,
+          pointTodayIc: widget.pointTodayIc,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           locale: widget.locale,
         );

@@ -28,6 +28,10 @@ class CellContent extends StatelessWidget {
   final bool pointIsCheck;
   //遗漏签到
   final bool pointMissCheck;
+  final String pointCheckIc;
+  final String pointMissIc;
+  final String pointNotStartIc;
+  final String pointTodayIc;
 
   const CellContent({
     super.key,
@@ -49,6 +53,10 @@ class CellContent extends StatelessWidget {
     required this.pointCount,
     required this.pointIsCheck,
     required this.pointMissCheck,
+    required this.pointCheckIc,
+    required this.pointMissIc,
+    required this.pointNotStartIc,
+    required this.pointTodayIc,
     this.locale,
   });
 
@@ -116,8 +124,10 @@ class CellContent extends StatelessWidget {
             decoration: calendarStyle.todayDecoration,
             alignment: alignment,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('+ ${pointCount}', style: calendarStyle.todayTextStyle),
+                Image.asset(pointTodayIc, width: 12),
+                Text('+${pointCount}', style: calendarStyle.todayTextStyle),
                 Text('${text} ${currentMonth}',
                     style: calendarStyle.todaySubTextStyle),
               ],
@@ -163,9 +173,10 @@ class CellContent extends StatelessWidget {
             decoration: calendarStyle.pointMissDecoration,
             alignment: alignment,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('+ ${pointCount}',
-                    style: calendarStyle.pointMissTextStyle),
+                Image.asset(pointMissIc, width: 12),
+                Text('+${pointCount}', style: calendarStyle.pointMissTextStyle),
                 Text('${text} ${currentMonth}',
                     style: calendarStyle.pointMissSubTextStyle),
               ],
@@ -180,8 +191,10 @@ class CellContent extends StatelessWidget {
             decoration: calendarStyle.selectedDecoration,
             alignment: alignment,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('+ ${pointCount}', style: calendarStyle.selectedTextStyle),
+                Image.asset(pointCheckIc, width: 12),
+                Text('+${pointCount}', style: calendarStyle.selectedTextStyle),
                 Text('${text} ${currentMonth}',
                     style: calendarStyle.selectedSubTextStyle),
               ],
@@ -198,8 +211,10 @@ class CellContent extends StatelessWidget {
                 : calendarStyle.defaultDecoration,
             alignment: alignment,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('+ ${pointCount}',
+                Image.asset(pointNotStartIc, width: 12),
+                Text('+${pointCount}',
                     style: isWeekend
                         ? calendarStyle.weekendTextStyle
                         : calendarStyle.defaultTextStyle),
