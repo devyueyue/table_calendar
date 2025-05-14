@@ -177,11 +177,26 @@ class CellContent extends StatelessWidget {
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(pointMissCycleIc, width: 30),
-                      Text('+${pointCount}',
-                          style: calendarStyle.pointMissTextStyle),
-                      Text('${text} ${currentMonth}',
-                          style: calendarStyle.pointMissSubTextStyle),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: Image.asset(pointMissCycleIc, width: 30),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Color(0xFFCCCCCC),
+                              borderRadius: BorderRadius.circular(9)),
+                          child: Column(
+                            children: [
+                              Text('+${pointCount}',
+                                  style: calendarStyle.pointMissTextStyle),
+                              Text('${text} ${currentMonth}',
+                                  style: calendarStyle.pointMissSubTextStyle),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 : Column(
