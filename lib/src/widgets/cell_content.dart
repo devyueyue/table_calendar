@@ -24,6 +24,7 @@ class CellContent extends StatelessWidget {
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
   final String pointCount;
+  final String pointCycleCount;
   final bool isCheckCycle;
   //已签到
   final bool pointIsCheck;
@@ -33,6 +34,7 @@ class CellContent extends StatelessWidget {
   final String pointMissIc;
   final String pointMissCycleIc;
   final String pointCheckCycleIc;
+  final String pointFutureCycleIc;
   final String pointNotStartIc;
   final String pointTodayIc;
 
@@ -54,12 +56,14 @@ class CellContent extends StatelessWidget {
     required this.isWeekend,
     required this.currentMonth,
     required this.pointCount,
+    required this.pointCycleCount,
     required this.pointIsCheck,
     required this.pointMissCheck,
     required this.pointCheckIc,
     required this.pointMissIc,
     required this.pointMissCycleIc,
     required this.pointCheckCycleIc,
+    required this.pointFutureCycleIc,
     required this.pointNotStartIc,
     required this.pointTodayIc,
     required this.isCheckCycle,
@@ -127,17 +131,94 @@ class CellContent extends StatelessWidget {
             duration: duration,
             margin: margin,
             padding: padding,
-            decoration: calendarStyle.todayDecoration,
+            decoration: (isCheckCycle && pointIsCheck)
+                ? BoxDecoration(
+                    color: const Color(0xFFF2FFF3),
+                    borderRadius: BorderRadius.circular(10),
+                    border:
+                        Border.all(color: const Color(0xFF26A6BA), width: 1))
+                : isCheckCycle
+                    ? calendarStyle.weekendDecoration
+                    : calendarStyle.todayDecoration,
             alignment: alignment,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(pointTodayIc, width: 12),
-                Text('+${pointCount}', style: calendarStyle.todayTextStyle),
-                Text('${text} ${currentMonth}',
-                    style: calendarStyle.todaySubTextStyle),
-              ],
-            ),
+            child: (isCheckCycle && pointIsCheck)
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 1),
+                        child: Image.asset(
+                          pointCheckCycleIc,
+                          width: double.infinity,
+                          height: 28,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF26A6BA),
+                              borderRadius: BorderRadius.circular(9)),
+                          child: Column(
+                            children: [
+                              Text('+${pointCycleCount}',
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.white)),
+                              Text('${text} ${currentMonth}',
+                                  style: const TextStyle(
+                                      fontSize: 7, color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : isCheckCycle
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 1),
+                            child: Image.asset(
+                              pointFutureCycleIc,
+                              width: double.infinity,
+                              height: 28,
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Color(0xFFFEA832),
+                                  borderRadius: BorderRadius.circular(9)),
+                              child: Column(
+                                children: [
+                                  Text('+${pointCycleCount}',
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.white)),
+                                  Text('${text} ${currentMonth}',
+                                      style: const TextStyle(
+                                          fontSize: 7, color: Colors.white)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(pointTodayIc, width: 12),
+                          Text('+${pointCount}',
+                              style: calendarStyle.todayTextStyle),
+                          Text('${text} ${currentMonth}',
+                              style: calendarStyle.todaySubTextStyle),
+                        ],
+                      ),
           );
     } else if (isHoliday) {
       cell = calendarBuilders.holidayBuilder?.call(context, day, focusedDay) ??
@@ -189,10 +270,16 @@ class CellContent extends StatelessWidget {
                               borderRadius: BorderRadius.circular(9)),
                           child: Column(
                             children: [
-                              Text('+${pointCount}',
-                                  style: calendarStyle.pointMissTextStyle),
+                              Text('+${pointCycleCount}',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color:
+                                          Color(0xFF333333).withOpacity(0.6))),
                               Text('${text} ${currentMonth}',
-                                  style: calendarStyle.pointMissSubTextStyle),
+                                  style: TextStyle(
+                                      fontSize: 7,
+                                      color:
+                                          Color(0xFF333333).withOpacity(0.6))),
                             ],
                           ),
                         ),
@@ -246,12 +333,12 @@ class CellContent extends StatelessWidget {
                               borderRadius: BorderRadius.circular(9)),
                           child: Column(
                             children: [
-                              Text('+${pointCount}',
+                              Text('+${pointCycleCount}',
                                   style: const TextStyle(
-                                      fontSize: 14, color: Colors.white)),
+                                      fontSize: 12, color: Colors.white)),
                               Text('${text} ${currentMonth}',
                                   style: const TextStyle(
-                                      fontSize: 8, color: Colors.white)),
+                                      fontSize: 7, color: Colors.white)),
                             ],
                           ),
                         ),
@@ -275,26 +362,60 @@ class CellContent extends StatelessWidget {
             duration: duration,
             margin: margin,
             padding: padding,
-            decoration: isWeekend
+            decoration: isCheckCycle
                 ? calendarStyle.weekendDecoration
                 : calendarStyle.defaultDecoration,
             alignment: alignment,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(pointNotStartIc, width: 12),
-                Text('+${pointCount}',
-                    style: isWeekend
-                        ? calendarStyle.weekendTextStyle
-                        : calendarStyle.defaultTextStyle),
-                Text(
-                  '${text} ${currentMonth}',
-                  style: isWeekend
-                      ? calendarStyle.weekendSubTextStyle
-                      : calendarStyle.defaultSubTextStyle,
-                ),
-              ],
-            ),
+            child: isCheckCycle
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 1),
+                        child: Image.asset(
+                          pointFutureCycleIc,
+                          width: double.infinity,
+                          height: 28,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Color(0xFFFEA832),
+                              borderRadius: BorderRadius.circular(9)),
+                          child: Column(
+                            children: [
+                              Text('+${pointCycleCount}',
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.white)),
+                              Text('${text} ${currentMonth}',
+                                  style: const TextStyle(
+                                      fontSize: 7, color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(pointNotStartIc, width: 12),
+                      Text('+${pointCount}',
+                          style: isWeekend
+                              ? calendarStyle.weekendTextStyle
+                              : calendarStyle.defaultTextStyle),
+                      Text(
+                        '${text} ${currentMonth}',
+                        style: isWeekend
+                            ? calendarStyle.weekendSubTextStyle
+                            : calendarStyle.defaultSubTextStyle,
+                      ),
+                    ],
+                  ),
           );
     }
 

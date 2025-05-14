@@ -214,6 +214,7 @@ class TableCalendar<T> extends StatefulWidget {
   final void Function(PageController pageController)? onCalendarCreated;
 
   final String pointCount;
+  final String pointCycleCount;
 
   ///签到周期
   final int checkCycle;
@@ -223,6 +224,7 @@ class TableCalendar<T> extends StatefulWidget {
   final String pointCheckIc;
   final String pointMissIc;
   final String pointCheckCycleIc;
+  final String pointFutureCycleIc;
   final String pointMissCycleIc;
   final String pointNotStartIc;
   final String pointTodayIc;
@@ -253,10 +255,12 @@ class TableCalendar<T> extends StatefulWidget {
     this.weekNumbersVisible = false,
     this.pointCheckList,
     this.pointCount = '',
+    this.pointCycleCount = '',
     this.checkCycle = 0,
     this.pointCheckIc = '',
     this.pointMissIc = '',
     this.pointCheckCycleIc = '',
+    this.pointFutureCycleIc = '',
     this.pointMissCycleIc = '',
     this.pointNotStartIc = '',
     this.pointTodayIc = '',
@@ -669,6 +673,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isWeekend: isWeekend,
           currentMonth: currentMonth,
           pointCount: widget.pointCount,
+          pointCycleCount: widget.pointCycleCount,
           pointMissCheck: !isOutside &&
               (day.day < focusedDay.day) &&
               !(widget.pointCheckList ?? []).contains(day.day),
@@ -678,6 +683,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           pointNotStartIc: widget.pointNotStartIc,
           pointMissIc: widget.pointMissIc,
           pointCheckCycleIc: widget.pointCheckCycleIc,
+          pointFutureCycleIc: widget.pointFutureCycleIc,
           pointMissCycleIc: widget.pointMissCycleIc,
           pointTodayIc: widget.pointTodayIc,
           isCheckCycle: day.day % widget.checkCycle == 0,

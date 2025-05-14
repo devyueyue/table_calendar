@@ -33,9 +33,10 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           // headerVisible: false,
           pageAnimationEnabled: false,
           availableGestures: AvailableGestures.none,
-          pointCheckList: [1, 2, 3, 5, 6, 8, 9, 10],
+          pointCheckList: [1, 2, 3, 5, 6, 8, 9, 10, 11],
           pointCount: '20',
-          checkCycle: 4,
+          pointCycleCount: '1000',
+          checkCycle: 3,
           calendarStyle: CalendarStyle(
             cellMargin: EdgeInsets.symmetric(horizontal: 3, vertical: 5),
             defaultDecoration: BoxDecoration(
@@ -63,7 +64,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                 TextStyle(fontSize: 8, color: Color(0xFF33333366)),
             weekendDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFFE5E5E5), width: 1)),
+                border: Border.all(color: const Color(0xFFFEA832), width: 1)),
             weekendTextStyle: TextStyle(
                 fontSize: 14, color: Color(0xFF333333).withOpacity(0.6)),
             weekendSubTextStyle:
@@ -86,6 +87,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           pointMissIc: 'assets/images/point_miss_ic.png',
           pointCheckCycleIc: 'assets/images/check_cycle_ic.png',
           pointMissCycleIc: 'assets/images/miss_cycle_ic.png',
+          pointFutureCycleIc: 'assets/images/point_future_cycle_ic.png',
           daysOfWeekHeight: 30,
           locale: 'id_ID',
           selectedDayPredicate: (day) {
