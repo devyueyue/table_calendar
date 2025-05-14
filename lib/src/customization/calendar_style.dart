@@ -165,6 +165,7 @@ class CalendarStyle {
   /// ```
   final TextFormatter? dayTextFormatter;
   final Decoration pointMissDecoration;
+  final Decoration pointMissCycleDecoration;
   final TextStyle pointMissTextStyle;
   final TextStyle pointMissSubTextStyle;
 
@@ -235,6 +236,7 @@ class CalendarStyle {
     this.outsideTextStyle = const TextStyle(color: Color(0xFFAEAEAE)),
     this.outsideDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.pointMissDecoration = const BoxDecoration(shape: BoxShape.circle),
+    this.pointMissCycleDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.disabledTextStyle = const TextStyle(color: Color(0xFFBFBFBF)),
     this.disabledDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.holidayTextStyle = const TextStyle(color: Color(0xFF5C6BC0)),

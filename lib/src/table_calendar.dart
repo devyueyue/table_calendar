@@ -215,10 +215,15 @@ class TableCalendar<T> extends StatefulWidget {
 
   final String pointCount;
 
+  ///签到周期
+  final int checkCycle;
+
   ///积分签到集合
   final List<int>? pointCheckList;
   final String pointCheckIc;
   final String pointMissIc;
+  final String pointCycleIc;
+  final String pointMissCycleIc;
   final String pointNotStartIc;
   final String pointTodayIc;
 
@@ -248,8 +253,11 @@ class TableCalendar<T> extends StatefulWidget {
     this.weekNumbersVisible = false,
     this.pointCheckList,
     this.pointCount = '',
+    this.checkCycle = 0,
     this.pointCheckIc = '',
     this.pointMissIc = '',
+    this.pointCycleIc = '',
+    this.pointMissCycleIc = '',
     this.pointNotStartIc = '',
     this.pointTodayIc = '',
     this.rowHeight = 52.0,
@@ -669,7 +677,10 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           pointCheckIc: widget.pointCheckIc,
           pointNotStartIc: widget.pointNotStartIc,
           pointMissIc: widget.pointMissIc,
+          pointCycleIc: widget.pointCycleIc,
+          pointMissCycleIc: widget.pointMissCycleIc,
           pointTodayIc: widget.pointTodayIc,
+          isCheckCycle: day.day % widget.checkCycle == 0,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           locale: widget.locale,
         );

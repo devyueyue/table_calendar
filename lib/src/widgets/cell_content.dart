@@ -24,12 +24,15 @@ class CellContent extends StatelessWidget {
   final CalendarStyle calendarStyle;
   final CalendarBuilders calendarBuilders;
   final String pointCount;
+  final bool isCheckCycle;
   //已签到
   final bool pointIsCheck;
   //遗漏签到
   final bool pointMissCheck;
   final String pointCheckIc;
   final String pointMissIc;
+  final String pointCycleIc;
+  final String pointMissCycleIc;
   final String pointNotStartIc;
   final String pointTodayIc;
 
@@ -55,8 +58,11 @@ class CellContent extends StatelessWidget {
     required this.pointMissCheck,
     required this.pointCheckIc,
     required this.pointMissIc,
+    required this.pointMissCycleIc,
+    required this.pointCycleIc,
     required this.pointNotStartIc,
     required this.pointTodayIc,
+    required this.isCheckCycle,
     this.locale,
   });
 
@@ -163,17 +169,31 @@ class CellContent extends StatelessWidget {
             duration: duration,
             margin: margin,
             padding: padding,
-            decoration: calendarStyle.pointMissDecoration,
+            decoration: isCheckCycle
+                ? calendarStyle.pointMissCycleDecoration
+                : calendarStyle.pointMissDecoration,
             alignment: alignment,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(pointMissIc, width: 12),
-                Text('+${pointCount}', style: calendarStyle.pointMissTextStyle),
-                Text('${text} ${currentMonth}',
-                    style: calendarStyle.pointMissSubTextStyle),
-              ],
-            ),
+            child: isCheckCycle
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(pointMissCycleIc, width: 30),
+                      Text('+${pointCount}',
+                          style: calendarStyle.pointMissTextStyle),
+                      Text('${text} ${currentMonth}',
+                          style: calendarStyle.pointMissSubTextStyle),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(pointMissIc, width: 12),
+                      Text('+${pointCount}',
+                          style: calendarStyle.pointMissTextStyle),
+                      Text('${text} ${currentMonth}',
+                          style: calendarStyle.pointMissSubTextStyle),
+                    ],
+                  ),
           );
     } else if (pointIsCheck) {
       cell = calendarBuilders.selectedBuilder?.call(context, day, focusedDay) ??
