@@ -222,7 +222,7 @@ class TableCalendar<T> extends StatefulWidget {
   final List<int>? pointCheckList;
   final String pointCheckIc;
   final String pointMissIc;
-  final String pointCycleIc;
+  final String pointCheckCycleIc;
   final String pointMissCycleIc;
   final String pointNotStartIc;
   final String pointTodayIc;
@@ -256,7 +256,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.checkCycle = 0,
     this.pointCheckIc = '',
     this.pointMissIc = '',
-    this.pointCycleIc = '',
+    this.pointCheckCycleIc = '',
     this.pointMissCycleIc = '',
     this.pointNotStartIc = '',
     this.pointTodayIc = '',
@@ -677,7 +677,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           pointCheckIc: widget.pointCheckIc,
           pointNotStartIc: widget.pointNotStartIc,
           pointMissIc: widget.pointMissIc,
-          pointCycleIc: widget.pointCycleIc,
+          pointCheckCycleIc: widget.pointCheckCycleIc,
           pointMissCycleIc: widget.pointMissCycleIc,
           pointTodayIc: widget.pointTodayIc,
           isCheckCycle: day.day % widget.checkCycle == 0,

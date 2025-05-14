@@ -35,7 +35,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           availableGestures: AvailableGestures.none,
           pointCheckList: [1, 2, 3, 5, 6, 8, 9, 10],
           pointCount: '20',
-          checkCycle: 6,
+          checkCycle: 4,
           calendarStyle: CalendarStyle(
             cellMargin: EdgeInsets.symmetric(horizontal: 3, vertical: 5),
             defaultDecoration: BoxDecoration(
@@ -84,7 +84,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           pointTodayIc: 'assets/images/point_today_ic.png',
           pointNotStartIc: 'assets/images/point_not_start_ic.png',
           pointMissIc: 'assets/images/point_miss_ic.png',
-          pointCycleIc: 'assets/images/cycle_ic.png',
+          pointCheckCycleIc: 'assets/images/check_cycle_ic.png',
           pointMissCycleIc: 'assets/images/miss_cycle_ic.png',
           daysOfWeekHeight: 30,
           locale: 'id_ID',

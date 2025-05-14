@@ -1,7 +1,7 @@
 // Copyright 2019 Aleksander Woźniak
 // SPDX-License-Identifier: Apache-2.0
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/src/customization/calendar_builders.dart';
 import 'package:table_calendar/src/customization/calendar_style.dart';
@@ -31,8 +31,8 @@ class CellContent extends StatelessWidget {
   final bool pointMissCheck;
   final String pointCheckIc;
   final String pointMissIc;
-  final String pointCycleIc;
   final String pointMissCycleIc;
+  final String pointCheckCycleIc;
   final String pointNotStartIc;
   final String pointTodayIc;
 
@@ -59,7 +59,7 @@ class CellContent extends StatelessWidget {
     required this.pointCheckIc,
     required this.pointMissIc,
     required this.pointMissCycleIc,
-    required this.pointCycleIc,
+    required this.pointCheckCycleIc,
     required this.pointNotStartIc,
     required this.pointTodayIc,
     required this.isCheckCycle,
@@ -216,17 +216,58 @@ class CellContent extends StatelessWidget {
             duration: duration,
             margin: margin,
             padding: padding,
-            decoration: calendarStyle.selectedDecoration,
+            decoration: isCheckCycle
+                ? BoxDecoration(
+                    color: const Color(0xFFF2FFF3),
+                    borderRadius: BorderRadius.circular(10),
+                    border:
+                        Border.all(color: const Color(0xFF26A6BA), width: 1))
+                : calendarStyle.selectedDecoration,
             alignment: alignment,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(pointCheckIc, width: 12),
-                Text('+${pointCount}', style: calendarStyle.selectedTextStyle),
-                Text('${text} ${currentMonth}',
-                    style: calendarStyle.selectedSubTextStyle),
-              ],
-            ),
+            child: isCheckCycle
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 1),
+                        child: Image.asset(
+                          pointCheckCycleIc,
+                          width: double.infinity,
+                          height: 28,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF26A6BA),
+                              borderRadius: BorderRadius.circular(9)),
+                          child: Column(
+                            children: [
+                              Text('+${pointCount}',
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Colors.white)),
+                              Text('${text} ${currentMonth}',
+                                  style: const TextStyle(
+                                      fontSize: 8, color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(pointCheckIc, width: 12),
+                      Text('+${pointCount}',
+                          style: calendarStyle.selectedTextStyle),
+                      Text('${text} ${currentMonth}',
+                          style: calendarStyle.selectedSubTextStyle),
+                    ],
+                  ),
           );
     } else {
       cell = calendarBuilders.defaultBuilder?.call(context, day, focusedDay) ??
