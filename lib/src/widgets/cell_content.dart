@@ -162,6 +162,7 @@ class CellContent extends StatelessWidget {
                               color: Color(0xFF26A6BA),
                               borderRadius: BorderRadius.circular(9)),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('+${pointCycleCount}',
                                   style: const TextStyle(
@@ -196,6 +197,7 @@ class CellContent extends StatelessWidget {
                                   color: Color(0xFFFEA832),
                                   borderRadius: BorderRadius.circular(9)),
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text('+${pointCycleCount}',
                                       style: const TextStyle(
@@ -269,6 +271,7 @@ class CellContent extends StatelessWidget {
                               color: Color(0xFFCCCCCC),
                               borderRadius: BorderRadius.circular(9)),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('+${pointCycleCount}',
                                   style: TextStyle(
@@ -332,6 +335,7 @@ class CellContent extends StatelessWidget {
                               color: Color(0xFF26A6BA),
                               borderRadius: BorderRadius.circular(9)),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('+${pointCycleCount}',
                                   style: const TextStyle(
@@ -387,6 +391,7 @@ class CellContent extends StatelessWidget {
                               color: Color(0xFFFEA832),
                               borderRadius: BorderRadius.circular(9)),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('+${pointCycleCount}',
                                   style: const TextStyle(
