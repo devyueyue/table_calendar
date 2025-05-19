@@ -213,11 +213,11 @@ class TableCalendar<T> extends StatefulWidget {
   /// Called when the calendar is created. Exposes its PageController.
   final void Function(PageController pageController)? onCalendarCreated;
 
-  final String pointCount;
-  final String pointCycleCount;
+  final List<int>? pointCountList;
+  final List<int>? pointCountCycleList;
 
   ///签到周期
-  final int checkCycle;
+  final List<int>? pointCycleList;
 
   ///积分签到集合
   final List<int>? pointCheckList;
@@ -254,9 +254,9 @@ class TableCalendar<T> extends StatefulWidget {
     this.shouldFillViewport = false,
     this.weekNumbersVisible = false,
     this.pointCheckList,
-    this.pointCount = '',
-    this.pointCycleCount = '',
-    this.checkCycle = 0,
+    this.pointCountList,
+    this.pointCountCycleList,
+    this.pointCycleList,
     this.pointCheckIc = '',
     this.pointMissIc = '',
     this.pointCheckCycleIc = '',
@@ -656,6 +656,18 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
         final isDisabled = _isDayDisabled(day);
         final isWeekend = _isWeekend(day, weekendDays: widget.weekendDays);
 
+        ///是否是周期签到
+        bool isCheckCycle =
+            !isOutside && (widget.pointCycleList ?? []).contains(day.day);
+        int pointCycleCount = 100;
+        int pointCount = 10;
+        if (isCheckCycle) {
+          int cycleIndex = widget.pointCycleList!.indexOf(day.day);
+          pointCycleCount = widget.pointCountCycleList![cycleIndex];
+        } else {
+          pointCount = widget.pointCountList![day.day];
+        }
+
         final content = CellContent(
           key: ValueKey('CellContent-${day.year}-${day.month}-${day.day}'),
           day: day,
@@ -672,8 +684,8 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isDisabled: isDisabled,
           isWeekend: isWeekend,
           currentMonth: currentMonth,
-          pointCount: widget.pointCount,
-          pointCycleCount: widget.pointCycleCount,
+          pointCount: pointCount.toString(),
+          pointCycleCount: pointCycleCount.toString(),
           pointMissCheck: !isOutside &&
               (day.day < focusedDay.day) &&
               !(widget.pointCheckList ?? []).contains(day.day),
@@ -686,7 +698,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           pointFutureCycleIc: widget.pointFutureCycleIc,
           pointMissCycleIc: widget.pointMissCycleIc,
           pointTodayIc: widget.pointTodayIc,
-          isCheckCycle: day.day % widget.checkCycle == 0,
+          isCheckCycle: isCheckCycle,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           locale: widget.locale,
         );
