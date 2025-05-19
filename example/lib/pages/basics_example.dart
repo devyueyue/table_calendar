@@ -33,7 +33,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
           // headerVisible: false,
           pageAnimationEnabled: false,
           availableGestures: AvailableGestures.none,
-          pointCheckList: [1, 2, 3, 5, 6, 8, 9, 10, 11],
+          pointCheckList: [1, 2, 3, 5, 6, 8, 9, 10, 11, 19],
           pointCount: '20',
           pointCycleCount: '1000',
           checkCycle: 3,

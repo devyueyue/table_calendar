@@ -125,7 +125,7 @@ class CellContent extends StatelessWidget {
             alignment: alignment,
             child: Text(text, style: calendarStyle.rangeEndTextStyle),
           );
-    } else if (isToday && isTodayHighlighted) {
+    } else if (isToday && isTodayHighlighted && !pointIsCheck) {
       cell = calendarBuilders.todayBuilder?.call(context, day, focusedDay) ??
           AnimatedContainer(
             duration: duration,
