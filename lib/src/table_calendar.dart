@@ -665,7 +665,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           int cycleIndex = widget.pointCycleList!.indexOf(day.day);
           pointCycleCount = widget.pointCountCycleList![cycleIndex];
         } else {
-          pointCount = widget.pointCountList![day.day];
+          pointCount = widget.pointCountList![day.day - 1];
         }
 
         final content = CellContent(

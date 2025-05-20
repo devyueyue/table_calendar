@@ -65,8 +65,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
             3,
             10,
             10,
-            56,
-            89
+            56
           ],
           pointCountCycleList: [100, 50, 80, 220, 350],
           pointCycleList: [7, 12, 15, 25, 28],
