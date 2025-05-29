@@ -95,15 +95,7 @@ class CellContent extends StatelessWidget {
     const duration = Duration(milliseconds: 250);
 
     if (isDisabled) {
-      cell = calendarBuilders.disabledBuilder?.call(context, day, focusedDay) ??
-          AnimatedContainer(
-            duration: duration,
-            margin: margin,
-            padding: padding,
-            decoration: calendarStyle.disabledDecoration,
-            alignment: alignment,
-            child: Text(text, style: calendarStyle.disabledTextStyle),
-          );
+      cell = SizedBox();
     } else if (isRangeStart) {
       cell =
           calendarBuilders.rangeStartBuilder?.call(context, day, focusedDay) ??
