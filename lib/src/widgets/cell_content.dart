@@ -95,7 +95,23 @@ class CellContent extends StatelessWidget {
     const duration = Duration(milliseconds: 250);
 
     if (isDisabled) {
-      cell = SizedBox();
+      cell = calendarBuilders.disabledBuilder?.call(context, day, focusedDay) ??
+          AnimatedContainer(
+            duration: duration,
+            margin: margin,
+            padding: padding,
+            decoration: calendarStyle.defaultDecoration,
+            alignment: alignment,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(pointMissIc, width: 12),
+                Text('+${pointCount}', style: calendarStyle.pointMissTextStyle),
+                Text('${text} ${currentMonth}',
+                    style: calendarStyle.pointMissSubTextStyle),
+              ],
+            ),
+          );
     } else if (isRangeStart) {
       cell =
           calendarBuilders.rangeStartBuilder?.call(context, day, focusedDay) ??
@@ -237,7 +253,22 @@ class CellContent extends StatelessWidget {
               );
     } else if (isOutside) {
       cell = calendarBuilders.outsideBuilder?.call(context, day, focusedDay) ??
-          SizedBox.shrink();
+          AnimatedContainer(
+            duration: duration,
+            margin: margin,
+            padding: padding,
+            decoration: calendarStyle.defaultDecoration,
+            alignment: alignment,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(pointMissIc, width: 12),
+                Text('+${pointCount}', style: calendarStyle.pointMissTextStyle),
+                Text('${text} ${currentMonth}',
+                    style: calendarStyle.pointMissSubTextStyle),
+              ],
+            ),
+          );
     } else if (pointMissCheck) {
       cell = calendarBuilders.selectedBuilder?.call(context, day, focusedDay) ??
           AnimatedContainer(
