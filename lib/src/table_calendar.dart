@@ -607,7 +607,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
   Widget _buildCell(DateTime day, DateTime focusedDay) {
     final isOutside = day.month != focusedDay.month;
 
-    String currentMonth = DateFormat.MMM(widget.locale).format(focusedDay);
+    String currentMonth = DateFormat.MMM(widget.locale).format(day);
 
     if (isOutside && _shouldBlockOutsideDays) {
       return Container();
